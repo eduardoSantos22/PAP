@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Objeto;
-use App\Models\categories;
-use App\Models\classrooms;
+use App\Models\category;
+use App\Models\classroom;
 use App\Models\photo;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,8 +32,8 @@ class ObjetoController extends Controller
     public function create()
     {
         //
-        $categorias = categories::all(); // Select * from categories;
-        $locais = classrooms::all();
+        $categorias = category::all(); // Select * from categories;
+        $locais = classroom::all();
         return view('objetos.create', compact('categorias', 'locais'));
     }
 
@@ -44,14 +44,14 @@ class ObjetoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-        //Validação do Formulário Objeto
+    //Validação do Formulário Objeto
     {
         request()->validate([
-            'inputTipoDeObj'=> 'required',
+            'inputTipoDeObj' => 'required',
             'inputLocalEnc' => 'required',
             'inputDiaEnc'   => 'required',
             'inputHoraEnc'  => 'nullable',
-            'inputCategoria'=> 'required',
+            'inputCategoria' => 'required',
             'inputEntregue' => 'nullable',
             'inputDoado'    => 'nullable',
             'textObserv'    => 'required'
@@ -64,7 +64,7 @@ class ObjetoController extends Controller
         $objeto->location = request('inputLocalEnc');
         $objeto->day_found = request('inputDiaEnc');
         $objeto->hour_found = request('inputHoraEnc');
-        $objeto->id_category = request('inputCategoria');
+        $objeto->category_id = request('inputCategoria');
         $objeto->delievered = $request->has('inputEntregue');
         $objeto->donated = $request->has('inputDoado');
         $objeto->observation = request('textObserv');
@@ -74,18 +74,16 @@ class ObjetoController extends Controller
             'imageFile' => 'required',
             'imageFile.*' => 'mimes:jpeg,jpg,png|max:4096'
         ]);
-        if($request->hasfile('imageFile')) {
-            foreach($request->file('imageFile') as $file)
-            {
+        if ($request->hasfile('imageFile')) {
+            foreach ($request->file('imageFile') as $file) {
                 $name = $file->getClientOriginalName();
-                $file->move(public_path().'/uploads/', $name);
+                $file->move(public_path() . '/uploads/', $name);
                 $imgData[] = $name;
             }
             $fileModal = new photo();
             $fileModal->designacao = json_encode($imgData);
             $fileModal->objeto_id = $objeto->id;
             $fileModal->save();
-
         }
         return redirect('/objetos');
     }

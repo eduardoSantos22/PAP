@@ -25,13 +25,13 @@ Route::get('/objetos', [App\Http\Controllers\ObjetoController::class, 'index'])-
 Route::post('/objetos', [App\Http\Controllers\ObjetoController::class, 'store']);
 Route::get('/objetos/create', [App\Http\Controllers\ObjetoController::class, 'create'])->name('objetos.create');
 
-Route::get('/categorias', [App\Http\Controllers\CategoriesController::class, 'index'])->name('categorias');
-Route::post('/categorias', [App\Http\Controllers\CategoriesController::class, 'store']);
-Route::get('/categorias/create', [App\Http\Controllers\CategoriesController::class, 'create'])->name('categorias.create');
+Route::get('/categorias', [App\Http\Controllers\CategoryController::class, 'index'])->name('categorias');
+Route::post('/categorias', [App\Http\Controllers\CategoryController::class, 'store']);
+Route::get('/categorias/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('categorias.create');
 
-Route::get('/locais', [App\Http\Controllers\ClassroomsController::class, 'index'])->name('locais');
-Route::post('/locais', [App\Http\Controllers\ClassroomsController::class, 'store']);
-Route::get('/locais/create', [App\Http\Controllers\ClassroomsController::class, 'create'])->name('locais.create');
+Route::get('/locais', [App\Http\Controllers\ClassroomController::class, 'index'])->name('locais');
+Route::post('/locais', [App\Http\Controllers\ClassroomController::class, 'store']);
+Route::get('/locais/create', [App\Http\Controllers\ClassroomController::class, 'create'])->name('locais.create');
 
 Route::get('/turmas', [App\Http\Controllers\TeamsController::class, 'index'])->name('turmas');
 Route::post('/turmas', [App\Http\Controllers\TeamsController::class, 'store']);

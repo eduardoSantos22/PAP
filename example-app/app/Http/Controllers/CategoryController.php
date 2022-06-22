@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\classrooms;
+use App\Models\category;
 use Illuminate\Http\Request;
-use Exception;
-use PhpParser\Node\Stmt\TryCatch;
 
-class ClassroomsController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,7 @@ class ClassroomsController extends Controller
     public function index()
     {
         //
-        return view('locais.index');
+        return view('categorias.index');
     }
 
     /**
@@ -27,7 +25,8 @@ class ClassroomsController extends Controller
      */
     public function create()
     {
-        return view('locais.create');
+        //
+        return view('categorias.create');
     }
 
     /**
@@ -37,28 +36,28 @@ class ClassroomsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    //Validação do Formulário dos locais
     {
+        //
         request()->validate([
-            'inputLocalEnc'=> 'required'
+            'inputCategoria' => 'required'
         ]);
 
 
-        //Inserção de dados no Formulário locais
-            $localidade = new classrooms();
-            $localidade->classroom = request('inputLocalEnc');
+        //Inserção de dados no Formulário Categorias
+        $categorias = new Category();
+        $categorias->name = request('inputCategoria');
 
-            $localidade->save();
-            return redirect('/locais');
+        $categorias->save();
+        return redirect('/categorias');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\categories  $categories
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(classrooms $classrooms)
+    public function show(category $category)
     {
         //
     }
@@ -66,10 +65,10 @@ class ClassroomsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\categories  $categories
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(classrooms $classrooms)
+    public function edit(category $category)
     {
         //
     }
@@ -78,10 +77,10 @@ class ClassroomsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\classrooms  $classrooms
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, classrooms $classrooms)
+    public function update(Request $request, category $category)
     {
         //
     }
@@ -89,12 +88,11 @@ class ClassroomsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\classrooms  $classrooms
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(classrooms $classrooms)
+    public function destroy(category $category)
     {
         //
     }
-
 }

@@ -22,14 +22,14 @@ return new class extends Migration
             $table->string('observation');
             $table->boolean('delievered')->nullable(true);
             $table->boolean('donated')->nullable(true);
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
-            $table->foreignId('id_category')
+            $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
                 ->onDelete('restrict');
         });
-
     }
 
     /**

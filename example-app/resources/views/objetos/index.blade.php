@@ -49,7 +49,7 @@
                         @foreach ($objetos as $objeto)
                         <tr>
                             <td>{{ $objeto->object_type }}</td>
-                            <td>{{ $objeto->categories->name }}</td>
+                            <td>{{ $objeto->category->name }}</td>
                             <td>{{ $objeto->location }}</td>
                             <td>{{ $objeto->day_found }}</td>
                             <td>{{ $objeto->delievered }}</td>
