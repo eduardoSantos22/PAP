@@ -13,7 +13,7 @@ use PhpParser\Node\Stmt\TryCatch;
 class ObjetoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a lis ting of the resource.
      *
      * @return \Illuminate\Http\Response
      */

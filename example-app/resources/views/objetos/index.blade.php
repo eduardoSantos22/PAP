@@ -50,7 +50,7 @@
                         <tr>
                             <td>{{ $objeto->object_type }}</td>
                             <td>{{ $objeto->category->name }}</td>
-                            <td>{{ $objeto->location }}</td>
+                            <td>{{ $objeto->classroom->classroom }}</td>
                             <td>{{ $objeto->day_found }}</td>
                             <td>{{ $objeto->delievered }}</td>
                             <td>{{ $objeto->donated }}</td>
