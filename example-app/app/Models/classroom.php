@@ -14,5 +14,3 @@ class classroom extends Model
         return $this->hasMany(Objeto::class);
     }
 }
-
-

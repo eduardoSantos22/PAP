@@ -61,7 +61,7 @@ class ObjetoController extends Controller
         //Inserção de dados no Formulário Objeto
         $objeto = new Objeto();
         $objeto->object_type = request('inputTipoDeObj');
-        $objeto->location_id = request('inputLocalEnc');
+        $objeto->classroom_id = request('inputLocalEnc');
         $objeto->day_found = request('inputDiaEnc');
         $objeto->hour_found = request('inputHoraEnc');
         $objeto->category_id = request('inputCategoria');
