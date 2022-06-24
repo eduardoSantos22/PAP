@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('objetos', function (Blueprint $table) {
             $table->id();
             $table->string('object_type');
-            $table->bigInteger('location');
+            $table->unsignedbigInteger('location_id');
             $table->date('day_found');
             $table->time('hour_found')->nullable(true);
             $table->string('observation');
@@ -28,6 +28,11 @@ return new class extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
+                ->onDelete('restrict');
+
+            $table->foreign('location_id')
+                ->references('id')
+                ->on('classrooms')
                 ->onDelete('restrict');
         });
     }

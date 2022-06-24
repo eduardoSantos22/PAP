@@ -45,7 +45,7 @@ class ClassroomController extends Controller
 
         //Inserção de dados no Formulário locais
         $localidade = new classroom();
-        $localidade->classroom = request('inputLocalEnc');
+        $localidade->designation = request('inputLocalEnc');
 
         $localidade->save();
         return redirect('/locais');

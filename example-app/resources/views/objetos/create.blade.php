@@ -57,9 +57,9 @@
                             <option value="DO" disabled selected hidden>Escolha aqui</option>
                             @foreach ($locais as $classrooms)
                                 @if (old('inputLocalEnc') == $classrooms->id)
-                                    <option value="{{ $classrooms->id }}" selected>{{ $classrooms->classroom }}</option>
+                                    <option value="{{ $classrooms->id }}" selected>{{ $classrooms->designation }}</option>
                                 @else
-                                    <option value="{{ $classrooms->id }}">{{ $classrooms->classroom }}</option>
+                                    <option value="{{ $classrooms->id }}">{{ $classrooms->designation }}</option>
                                 @endif
                             @endforeach
                         </select>
