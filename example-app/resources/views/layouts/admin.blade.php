@@ -264,7 +264,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('categorias') }}" class="nav-link">
                             <i class="far fa-file nav-icon"></i>
                             <p>Listar categorias</p>
                         </a>
@@ -403,10 +403,11 @@
 <script>
 
 $(function () {
-      $("#projetos").DataTable({
+      $("#objetos").DataTable({
         "responsive": true, "lengthChange": true, "autoWidth": false,
         "language": {
-            "url": "plugins/datatables/pt-PT.json"}
+            "url": "plugins/datatables/pt-PT.json"},
+            "order": [[3, "desc"]]
       });
     });
 

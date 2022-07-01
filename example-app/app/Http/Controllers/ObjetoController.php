@@ -68,13 +68,13 @@ class ObjetoController extends Controller
         $objeto->delievered = $request->has('inputEntregue');
         $objeto->donated = $request->has('inputDoado');
         $objeto->observation = request('textObserv');
-        $objeto->save();
 
         $request->validate([
             'imageFile' => 'required',
             'imageFile.*' => 'mimes:jpeg,jpg,png|max:4096'
         ]);
         if ($request->hasfile('imageFile')) {
+            $objeto->save(); //Apenas grava o projeto se existirem fotos
             foreach ($request->file('imageFile') as $file) {
                 $name = $file->getClientOriginalName();
                 $file->move(public_path() . '/uploads/', $name);
@@ -85,7 +85,7 @@ class ObjetoController extends Controller
             $fileModal->objeto_id = $objeto->id;
             $fileModal->save();
         }
-        return redirect('/objetos');
+        return redirect('/objetos')->with('message', 'Objeto inserido com sucesso!');
     }
 
     /**

@@ -96,7 +96,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                      <table id="projetos" class="table table-bordered table-striped">
+                      <table id="objetos" class="table table-bordered table-striped">
                           <thead>
                               <tr>
                                   <th>Objeto</th>
