@@ -15,7 +15,8 @@ class ClassroomController extends Controller
     public function index()
     {
         //
-        return view('locais.index');
+        $localidade = classroom::all();
+        return view('locais.index', compact('localidade'));
     }
 
     /**
@@ -48,7 +49,7 @@ class ClassroomController extends Controller
         $localidade->designation = request('inputLocalEnc');
 
         $localidade->save();
-        return redirect('/locais');
+        return redirect('/locais')->with('message', 'Local inserido com sucesso!');
     }
 
     /**

@@ -17,7 +17,8 @@ class TeamsController extends Controller
     public function index()
     {
         //
-        return view('turmas.index');
+        $turma = teams::all();
+        return view('turmas.index', compact('turma'));
     }
 
     /**
@@ -50,7 +51,7 @@ class TeamsController extends Controller
             $turma->team = request('inputTurma');
 
             $turma->save();
-            return redirect('/turmas');
+            return redirect('/turmas')->with('message', 'Turma inserida com sucesso!');
     }
 
     /**

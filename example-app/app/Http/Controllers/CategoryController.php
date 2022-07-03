@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $categorias->name = request('inputCategoria');
 
         $categorias->save();
-        return redirect('/categorias');
+        return redirect('/categorias')->with('message', 'Categoria inserida com sucesso!');
     }
 
     /**

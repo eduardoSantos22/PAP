@@ -53,19 +53,19 @@
                             <th>Dia</th>
                             <th>Entregue</th>
                             <th>Doado</th>
-                            <th>Atualizar</th>
                             <th>Remover</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($objetos as $objeto)
                         <tr>
-                            <td>{{ $objeto->object_type }}</td>
+                            <td><a href="/objetos/{{ $objeto->id }}/edit">{{ $objeto->object_type }}</a></td>
                             <td>{{ $objeto->category->name }}</td>
                             <td>{{ $objeto->classroom->designation }}</td>
                             <td>{{ $objeto->day_found }}</td>
                             <td>{{ $objeto->delievered }}</td>
                             <td>{{ $objeto->donated }}</td>
+                            <td class="text-center"><i class="fas fa-trash text-danger"></i></td>
                         </tr>
                         @endforeach
                     </tbody>

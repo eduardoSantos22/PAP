@@ -289,7 +289,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('locais') }}" class="nav-link">
                             <i class="far fa-file nav-icon"></i>
                             <p>Listar Salas</p>
                         </a>
@@ -314,7 +314,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('turmas') }}" class="nav-link">
                             <i class="far fa-file nav-icon"></i>
                             <p>Listar Turmas</p>
                         </a>

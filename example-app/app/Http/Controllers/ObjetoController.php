@@ -44,8 +44,9 @@ class ObjetoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    //Validação do Formulário Objeto
+
     {
+        //Validação do Formulário Objeto
         request()->validate([
             'inputTipoDeObj' => 'required',
             'inputLocalEnc' => 'required',
@@ -69,16 +70,26 @@ class ObjetoController extends Controller
         $objeto->donated = $request->has('inputDoado');
         $objeto->observation = request('textObserv');
 
+        $objeto->save();
+
         $request->validate([
-            'imageFile' => 'required',
+            //'imageFile' => 'required',
             'imageFile.*' => 'mimes:jpeg,jpg,png|max:4096'
         ]);
         if ($request->hasfile('imageFile')) {
-            $objeto->save(); //Apenas grava o projeto se existirem fotos
+            $i = 1;
             foreach ($request->file('imageFile') as $file) {
                 $name = $file->getClientOriginalName();
+                // extensao da foto
+                $extension = pathinfo($name, PATHINFO_EXTENSION);
+                //remover acentos do nome do objeto na foto
+                $object_type = preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"), $objeto->object_type);
+                //remover espaços do nome do objeto na foto
+                $object_type = str_replace(' ', '', $object_type);
+                $name = $object_type . $i . "." . $extension;
                 $file->move(public_path() . '/uploads/', $name);
                 $imgData[] = $name;
+                $i++;
             }
             $fileModal = new photo();
             $fileModal->designacao = json_encode($imgData);
@@ -108,6 +119,9 @@ class ObjetoController extends Controller
     public function edit(Objeto $objeto)
     {
         //
+        $categorias = category::all(); // Select * from categories;
+        $locais = classroom::all();
+        return view('objetos.edit', compact('categorias', 'locais', 'objeto'));
     }
 
     /**
@@ -119,7 +133,32 @@ class ObjetoController extends Controller
      */
     public function update(Request $request, Objeto $objeto)
     {
-        //
+        //Validação do Formulário Objeto
+        request()->validate([
+            'inputTipoDeObj' => 'required',
+            'inputLocalEnc' => 'required',
+            'inputDiaEnc'   => 'required',
+            'inputHoraEnc'  => 'nullable',
+            'inputCategoria' => 'required',
+            'inputEntregue' => 'nullable',
+            'inputDoado'    => 'nullable',
+            'textObserv'    => 'required'
+        ]);
+
+
+        //Inserção de dados no Formulário Objeto
+
+        $objeto->object_type = request('inputTipoDeObj');
+        $objeto->classroom_id = request('inputLocalEnc');
+        $objeto->day_found = request('inputDiaEnc');
+        $objeto->hour_found = request('inputHoraEnc');
+        $objeto->category_id = request('inputCategoria');
+        $objeto->delievered = $request->has('inputEntregue');
+        $objeto->donated = $request->has('inputDoado');
+        $objeto->observation = request('textObserv');
+
+        $objeto->save();
+        return redirect('/objetos')->with('message', 'Objeto alterado com sucesso!');
     }
 
     /**
