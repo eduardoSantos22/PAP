@@ -87,7 +87,7 @@ class ObjetoController extends Controller
                 //remover espaços do nome do objeto na foto
                 $object_type = str_replace(' ', '', $object_type);
                 $name = $object_type . $i . "." . $extension;
-                $file->move(public_path() . '/uploads/', $name);
+                $file->storeAs('public/uploads/', $name);
                 $imgData[] = $name;
                 $i++;
             }
@@ -121,7 +121,15 @@ class ObjetoController extends Controller
         //
         $categorias = category::all(); // Select * from categories;
         $locais = classroom::all();
-        return view('objetos.edit', compact('categorias', 'locais', 'objeto'));
+        $photo = photo::where('objeto_id', $objeto->id)->first(); //select * from fotos where fotos.objeto_id = objetos.objeto_id;
+        if($photo){
+            // caso existam fotos associadas ao objeto então converte-se o campo designacao num array de designacoes
+            $designacoes = json_decode($photo->designacao);
+        }else{
+            // caso contrário, o array designacoes fica vazio
+            $designacoes = [];
+        }
+        return view('objetos.edit', compact('categorias', 'locais', 'objeto', 'photo', 'designacoes'));
     }
 
     /**
@@ -158,6 +166,36 @@ class ObjetoController extends Controller
         $objeto->observation = request('textObserv');
 
         $objeto->save();
+
+        $request->validate([
+            //'imageFile' => 'required',
+            'imageFile.*' => 'mimes:jpeg,jpg,png|max:4096'
+        ]);
+        if ($request->hasfile('imageFile')) {
+
+            $fileModal = photo::where('objeto_id', $objeto->id)->first();
+            $photos = ($fileModal) ? json_decode($fileModal->designacao) : [];
+            $i = count($photos) + 1;
+
+            foreach ($request->file('imageFile') as $file) {
+                $name = $file->getClientOriginalName();
+                // extensao da foto
+                $extension = pathinfo($name, PATHINFO_EXTENSION);
+                //remover acentos do nome do objeto na foto
+                $object_type = preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"), $objeto->object_type);
+                //remover espaços do nome do objeto na foto
+                $object_type = str_replace(' ', '', $object_type);
+                $name = $object_type . $i . "." . $extension;
+                $file->storeAs('public/uploads/', $name);
+                $imgData[] = $name;
+                $i++;
+            }
+
+            $imgData = array_merge($photos, $imgData);
+            $fileModal->designacao = json_encode($imgData);
+            $fileModal->save();
+        }
+
         return redirect('/objetos')->with('message', 'Objeto alterado com sucesso!');
     }
 

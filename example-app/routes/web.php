@@ -27,6 +27,8 @@ Route::get('/objetos/create', [App\Http\Controllers\ObjetoController::class, 'cr
 Route::get('/objetos/{objeto}/edit', [App\Http\Controllers\ObjetoController::class, 'edit'])->middleware('auth');
 Route::put('/objetos/{objeto}', [App\Http\Controllers\ObjetoController::class, 'update'])->middleware('auth');
 
+Route::delete('/fotos/{photo}/{descricao}', [App\Http\Controllers\PhotoController::class, 'destroy'])->middleware('auth');
+
 Route::get('/categorias', [App\Http\Controllers\CategoryController::class, 'index'])->middleware('auth')->name('categorias');
 Route::post('/categorias', [App\Http\Controllers\CategoryController::class, 'store'])->middleware('auth');
 Route::get('/categorias/create', [App\Http\Controllers\CategoryController::class, 'create'])->middleware('auth')->name('categorias.create');

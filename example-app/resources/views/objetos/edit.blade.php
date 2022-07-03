@@ -120,7 +120,7 @@
                         <label for="inputEntregue">Objeto entregue:</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="checkbox" nullable checked="{{ empty(old('inputEntregue')) ? $objeto->delievered : old('inputEntregue') }}" class="form-control" name="inputEntregue" id="inputEntregue">
+                        <input type="checkbox" nullable {{ ($objeto->delievered == '1') ? 'checked' : '' }} class="form-control" name="inputEntregue" id="inputEntregue">
                     </div>
                 </div><hr>
                 <div class="form-group"> <!-- Doado sim ou não -->
@@ -128,7 +128,7 @@
                         <label for="inputDoado">Objeto doado:</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="checkbox" nullable checked="{{ empty(old('inputDoado')) ? $objeto->donated : old('inputDoado') }}" class="form-control" name="inputDoado" id="inputDoado">
+                        <input type="checkbox" nullable {{ ($objeto->donated == '1') ? 'checked' : '' }} class="form-control" name="inputDoado" id="inputDoado">
                     </div>
                 </div>
                 <div class="form-group row"> <!-- Observações -->
@@ -147,7 +147,19 @@
                 <div class="form-group"> <!-- Fotografia(s) do(s) objeto(s) -->
                     <label>Fotografia do objeto:</label>
                     <div class="user-image mb-3 text-center">
-                        <div class="imgPreview"> </div>
+                        <div class="imgPreview">
+                            {{-- Para cada foto no array designacoes --}}
+                            @foreach ($designacoes as $designacao)
+                                @if (Storage::exists('public/uploads/'.$designacao))
+                                    <span class="pic" id="{{ $loop->index }}"> {{-- $loop->index é o indice do ciclo foreach --}}
+                                        <a href="javascript:void(0)" onclick="deletephoto('{{ $photo->id }}', '{{ $designacao }}', '{{ $loop->index }}')">
+                                            <i class="fas fa-minus-circle close text-danger"></i>
+                                        </a>
+                                        <img width="200" class="img-thumbnail" src="{{ asset('storage/uploads')."/".$designacao }}" alt="">
+                                    </span>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                     <div class="input-group">
                         <div class="custom-file">
@@ -174,7 +186,7 @@
               <!-- /.card-body -->
 
               <div class="card-footer">
-                    <button type="submit" class="btn btn-success" id="btnInserir" name="btnInserir">Inserir</button>
+                    <button type="submit" class="btn btn-success" id="btnInserir" name="btnInserir">Guardar alterações</button>
                     <button type="button" class="btn btn-primary" id="btnLimpar" name="btnLimpar">Limpar</button>
               </div>
             </form>
