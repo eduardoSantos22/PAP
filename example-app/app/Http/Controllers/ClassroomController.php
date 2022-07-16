@@ -95,5 +95,7 @@ class ClassroomController extends Controller
     public function destroy(classroom $classroom)
     {
         //
+        $classroom->delete();
+        return redirect('/locais')->with('message', 'Local removido com sucesso!');
     }
 }

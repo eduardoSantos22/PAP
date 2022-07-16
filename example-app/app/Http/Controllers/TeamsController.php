@@ -97,5 +97,7 @@ class TeamsController extends Controller
     public function destroy(teams $teams)
     {
         //
+        $teams->delete();
+        return redirect('/turmas')->with('message', 'Turma removida com sucesso!');
     }
 }

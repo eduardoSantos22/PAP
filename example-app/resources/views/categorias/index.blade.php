@@ -51,7 +51,6 @@
                         <tr>
                             <th>Categoria</th>
                             <th>Remover</th>
-                            <th>Atualizar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +58,15 @@
                         @foreach ($categorias as $categoria)
                         <tr>
                             <td>{{ $categoria->name }}</td>
+                            <td class="text-center">
+                                <form role="form" action="/categorias/{{ $categoria->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="link" style="background-color: transparent; border: none">
+                                    <i class="fas fa-trash text-danger" data-toggle="tooltip" title="Eliminar"></i>
+                                </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
 

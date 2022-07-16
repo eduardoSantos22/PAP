@@ -1,112 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registo | Perdidos e Achados</title>
+@extends('layouts.admin')
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition register-page">
-<div class="register-box">
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="{{ route('register') }}" class="h1"><b>Registo</b></a>
+@section('content')
+
+
+<div class="row pt-4">
+    <div class="col-12 col-xl-12">
+        <div class="card card-body border-0 shadow mb-4">
+            <h2 class="h5 mb-4">Criar Administrador</h2>
+            <form role="form" method="POST" action="{{ route('register') }}">
+            @csrf
+                <div class="center">
+                    <div class="col-md-4 mb-3">
+                        <label for="name">Nome</label>
+                            <div class="input-group">
+                                <input id="name" type="text" placeholder="Nome" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <div>
+                                        <label for="email">Email</label>
+                                        <div class="input-group">
+                                            <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        </div>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 mb-3">
+                                            <div>
+                                                <label for="password">Password</label>
+                                                    <div class="input-group">
+                                                        <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                                    </div>
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div>
+                                                <label for="confirm_password">Confirme a Password</label>
+                                                <div class="input-group">
+                                                        <input id="password-confirm" placeholder="Password "type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-13 mb-3">
+                                        <div class="mt-3 ">
+                                            <button type="submit" class="btn btn-primary" style="float:right">
+                                                {{ __('Registar') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-      <p class="login-box-msg">Crie a sua conta de utilizador</p>
-
-      <form method="POST" action="{{ route('register') }}">
-        @csrf
-        <div class="input-group mb-3">
-            <input id="name" placeholder="Nome" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-
-            @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-
-        </div>
-        <div class="input-group mb-3">
-            <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-
-        </div>
-        <div class="input-group mb-3">
-          <input id="password" placeholder="Palavra-passe" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-
-        </div>
-        <div class="input-group mb-3">
-            <input id="password-confirm" placeholder="Confirme a Palavra-passe" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            {{-- <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
-            </div> --}}
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Registar</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-
-      <a href="{{ route('login') }}" class="text-center">Já tenho uma conta</a>
-    </div>
-    <!-- /.form-box -->
-  </div><!-- /.card -->
-</div>
-<!-- /.register-box -->
-
-<!-- jQuery -->
-<script src="/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/dist/js/adminlte.min.js"></script>
-</body>
-</html>
+@endsection

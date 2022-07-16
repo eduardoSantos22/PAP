@@ -75,7 +75,7 @@
 
       <!-- /.social-auth-links -->
 
-        <p class="mb-1">
+        {{-- <p class="mb-1">
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}">
                     {{ __('Recuperar palavra-passe') }}
@@ -84,7 +84,7 @@
         </p>
         <p class="mb-0">
             <a href="{{ route('register') }}" class="text-center">Registar novo utilizador</a>
-        </p>
+        </p> --}}
     </div>
     <!-- /.card-body -->
   </div>

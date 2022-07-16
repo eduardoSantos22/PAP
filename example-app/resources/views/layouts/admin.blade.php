@@ -66,21 +66,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link">Início</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contactos</a>
-      </li>
     </ul>
-    <!-- Navbar Search -->
-    <form class="form-inline ml-3">
-        <div class="input-group">
-            <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
 
     <!-- Right navbar links -->
     {{-- <ul class="navbar-nav ml-auto">
@@ -336,6 +322,31 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-project-diagram"></i>
+                    <p>
+                        Admins
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link">
+                            <i class="far fa-file nav-icon"></i>
+                            <p>Novo Admin</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('turmas') }}" class="nav-link">
+                            <i class="far fa-file nav-icon"></i>
+                            <p>Listar Admins</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -467,7 +478,7 @@ $(function () {
             //No entanto precisamos de remover a imagem do storage
             $.ajax({
                 type: "delete",
-                url: "/fotos/" + photo + "/" + designacao,
+                url: "/photos/" + photo + "/" + designacao,
                 data: {_token: '{{ csrf_token() }}'},
                 dataType: "json",
                 success: function (response){

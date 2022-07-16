@@ -81,16 +81,26 @@ class PhotoController extends Controller
      */
     public function destroy(photo $photo, $designacao)
     {
+        $existe = false;
         //Remove a imagem do storage
         Storage::delete('public/uploads/'.$designacao);
         //Remove a imagem da tabela photo
         $photos = json_decode($photo->designacao);
-        if(($key = array_search($designacao, $photos)) != false){
-            unset($photo[$key]); //Remove a designacao se esta existir no array de designacoes da tabela photo
-            $photo->designacao = $photos;
-        }else{
-            $photo->designacao = [];
+
+        foreach($photos as $key => $value){
+            if(strcmp($value, $designacao)==0){
+                array_splice($photos, $key, 1);
+                $photo->designacao = json_encode($photos);
+                $existe = true;
+                break;
+            }
         }
+
+        if(!$existe){
+            $photos = [];
+            $photo->designacao = json_encode($photos);
+        }
+
         $photo->save();
     }
 }

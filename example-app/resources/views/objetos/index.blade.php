@@ -65,7 +65,15 @@
                             <td>{{ $objeto->day_found }}</td>
                             <td>{{ $objeto->delievered }}</td>
                             <td>{{ $objeto->donated }}</td>
-                            <td class="text-center"><i class="fas fa-trash text-danger"></i></td>
+                            <td class="text-center">
+                                <form role="form" action="/objetos/{{ $objeto->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="link" style="background-color: transparent; border: none">
+                                    <i class="fas fa-trash text-danger" data-toggle="tooltip" title="Eliminar"></i>
+                                </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

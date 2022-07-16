@@ -91,39 +91,15 @@
             <!-- Left col -->
             <section class="col-lg-12">
               <div class="card">
-                  <div class="card-header bg-lightblue">
-                    <h3 class="card-title">Objetos Perdidos</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body">
-                      <table id="objetos" class="table table-bordered table-striped">
-                          <thead>
-                              <tr>
-                                  <th>Objeto</th>
-                                  <th>Categoria</th>
-                                  <th>Encontrado</th>
-                                  <th>Entregue</th>
-                                  <th>Doado</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>Camisola</td>
-                                  <td>Roupa</td>
-                                  <td>Sala 1</td>
-                                  <td>Não</td>
-                                  <td>Não</td>
-                              </tr>
-                              <tr>
-                                  <td>Chapéu</td>
-                                  <td>Roupa</td>
-                                  <td>Sala 31</td>
-                                  <td>Sim</td>
-                                  <td>Não</td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
+                    <div class="card-header bg-lightblue">
+                        <h3 class="card-title"></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                        <h4 class="text-center">-Bem-vindo ao Back Office!-</h4>
+                        <h5 class="text-center">Selecione uma das pastas para começar!</h5>
+                    </div>
                   <!-- /.card-body -->
                 </div>
             </section>

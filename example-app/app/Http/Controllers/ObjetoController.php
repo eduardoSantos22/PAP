@@ -108,6 +108,9 @@ class ObjetoController extends Controller
     public function show(Objeto $objeto)
     {
         //
+        $photo = photo::where('objeto_id', $objeto->id)->first();
+        $photos = json_decode($photo->designacao);
+        return view('objetos.show', compact('objeto', 'photos'));
     }
 
     /**
@@ -175,7 +178,11 @@ class ObjetoController extends Controller
 
             $fileModal = photo::where('objeto_id', $objeto->id)->first();
             $photos = ($fileModal) ? json_decode($fileModal->designacao) : [];
-            $i = count($photos) + 1;
+            $i = 1;
+            if (count($photos) > 0){
+                //Descobre o número presente na designacao e soma-lhe uma unidade
+                $i = (int) filter_var($photos[count($photos)-1], FILTER_SANITIZE_NUMBER_INT) + 1;
+            }
 
             foreach ($request->file('imageFile') as $file) {
                 $name = $file->getClientOriginalName();
@@ -207,6 +214,8 @@ class ObjetoController extends Controller
      */
     public function destroy(Objeto $objeto)
     {
-        //
+        //Eliminar um objeto
+        $objeto->delete();
+        return redirect('/objetos')->with('message', 'Objeto removido com sucesso!');
     }
 }

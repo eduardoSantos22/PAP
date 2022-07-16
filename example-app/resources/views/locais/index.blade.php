@@ -50,7 +50,6 @@
                         <tr>
                             <th>Local</th>
                             <th>Remover</th>
-                            <th>Atualizar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +57,15 @@
                         @foreach ($localidade as $local)
                         <tr>
                             <td>{{ $local->designation }}</td>
+                            <td class="text-center">
+                                <form role="form" action="/locais/{{ $local->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="link" style="background-color: transparent; border: none">
+                                    <i class="fas fa-trash text-danger" data-toggle="tooltip" title="Eliminar"></i>
+                                </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
 
