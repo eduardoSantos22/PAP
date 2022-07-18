@@ -110,6 +110,7 @@ class ObjetoController extends Controller
         //
         $photo = photo::where('objeto_id', $objeto->id)->first();
         $photos = json_decode($photo->designacao);
+       // var_dump($photos);
         return view('objetos.show', compact('objeto', 'photos'));
     }
 

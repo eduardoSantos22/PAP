@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Categorias</h1>
+          <h1>Admin</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Listar Categorias</li>
+            <li class="breadcrumb-item active">Listar Administradores</li>
           </ol>
         </div>
       </div>
@@ -39,7 +39,7 @@
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Listagem de Categorias</h3>
+              <h3 class="card-title">Listagem de Administradores</h3>
             </div>
             <!-- /.card-header -->
 
@@ -49,20 +49,24 @@
 
                     <thead>
                         <tr>
-                            <th>Categoria</th>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
                             <th>Remover</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach ($categorias as $categoria)
+                        @foreach ($users as $user)
                         <tr>
-                            <td>{{ $categoria->name }}</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
                             <td class="text-center">
-                                <form role="form" action="/categorias/{{ $categoria->id }}" method="post">
+                                <form role="form" action="/admin/{{ $user->id }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="link" onclick="return confirm('Verifique que esta categoria não está associada a um objeto. Tem acerteza que quere apagar?')" style="background-color: transparent; border: none">
+                                <button type="submit" class="link" onclick="return confirm('Tem acerteza que quer apagar este administrador?')" style="background-color: transparent; border: none">
                                     <i class="fas fa-trash text-danger" data-toggle="tooltip" title="Eliminar"></i>
                                 </button>
                                 </form>

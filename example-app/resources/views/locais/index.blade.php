@@ -61,7 +61,7 @@
                                 <form role="form" action="/locais/{{ $local->id }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="link" style="background-color: transparent; border: none">
+                                <button type="submit" class="link" onclick="return confirm('Verifique que esta sala não está associada a um objeto. Tem acerteza que quere apagar?')" style="background-color: transparent; border: none">
                                     <i class="fas fa-trash text-danger" data-toggle="tooltip" title="Eliminar"></i>
                                 </button>
                                 </form>

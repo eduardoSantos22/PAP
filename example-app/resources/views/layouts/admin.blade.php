@@ -239,12 +239,6 @@
                             <p>Listar objetos</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="./index2.html" class="nav-link">
-                            <i class="fas fa-trash nav-icon"></i>
-                            <p style="font-size: 94%">Remover todos os objetos</p>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -340,7 +334,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('turmas') }}" class="nav-link">
+                        <a href="{{ route('users') }}" class="nav-link">
                             <i class="far fa-file nav-icon"></i>
                             <p>Listar Admins</p>
                         </a>

@@ -6,6 +6,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Perdidos e Achados</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <!-- Bootstrap icons-->

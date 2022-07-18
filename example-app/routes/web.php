@@ -65,10 +65,11 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::get('/objetos', [App\Http\Controllers\ObjetoController::class, 'index'])->middleware('auth')->name('objetos');
-Route::get('/objetos/{objeto}', [App\Http\Controllers\ObjetoController::class, 'show'])->name('objetos.show');
+
 Route::post('/objetos', [App\Http\Controllers\ObjetoController::class, 'store'])->middleware('auth');
 Route::get('/objetos/create', [App\Http\Controllers\ObjetoController::class, 'create'])->middleware('auth')->name('objetos.create');
 Route::get('/objetos/{objeto}/edit', [App\Http\Controllers\ObjetoController::class, 'edit'])->middleware('auth');
+Route::get('/objetos/{objeto}', [App\Http\Controllers\ObjetoController::class, 'show'])->name('objetos.show');
 Route::put('/objetos/{objeto}', [App\Http\Controllers\ObjetoController::class, 'update'])->middleware('auth');
 
 Route::delete('/objetos/{objeto}', [App\Http\Controllers\ObjetoController::class, 'destroy'])->middleware('auth');
@@ -90,3 +91,5 @@ Route::post('/turmas', [App\Http\Controllers\TeamsController::class, 'store'])->
 Route::get('/turmas/create', [App\Http\Controllers\TeamsController::class, 'create'])->middleware('auth')->name('turmas.create');
 Route::delete('/turmas/{teams}', [App\Http\Controllers\TeamsController::class, 'destroy'])->middleware('auth');
 
+Route::get('/admin', [App\Http\Controllers\Admin\UserController::class, 'index'])->middleware('auth')->name('users');
+Route::delete('/admin/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->middleware('auth');
